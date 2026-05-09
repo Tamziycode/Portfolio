@@ -1,715 +1,1976 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Tamilore — Full-Stack Engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<style>
-:root {
-  --bg:#080b0f; --bg2:#0c1018; --bg3:#111620; --surface:#141a24;
-  --border:#1e2738; --border2:#263044;
-  --red:#ff2d1f; --red-dim:#cc2419; --red-glow:rgba(255,45,31,.2); --red-soft:rgba(255,45,31,.07);
-  --blue:#2d8fff; --blue-dim:#1a6fd4; --blue-glow:rgba(45,143,255,.18); --blue-soft:rgba(45,143,255,.07); --blue-line:rgba(45,143,255,.3);
-  --text:#e8edf5; --text2:#8a95a8; --text3:#404a5c;
-  --mono:'JetBrains Mono',monospace; --sans:'Space Grotesk',sans-serif; --display:'Bebas Neue',sans-serif;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7;overflow-x:hidden;}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/portfolio-favicon.svg" />
+    <link rel="icon" type="image/png" href="/portfolio-favicon.png" />
+    <title>Tamilore — Full-Stack Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #080b0f;
+        --bg2: #0c1018;
+        --bg3: #111620;
+        --surface: #141a24;
+        --border: #1e2738;
+        --border2: #263044;
+        --red: #ff2d1f;
+        --red-dim: #cc2419;
+        --red-glow: rgba(255, 45, 31, 0.2);
+        --red-soft: rgba(255, 45, 31, 0.07);
+        --blue: #2d8fff;
+        --blue-dim: #1a6fd4;
+        --blue-glow: rgba(45, 143, 255, 0.18);
+        --blue-soft: rgba(45, 143, 255, 0.07);
+        --blue-line: rgba(45, 143, 255, 0.3);
+        --text: #e8edf5;
+        --text2: #8a95a8;
+        --text3: #404a5c;
+        --mono: "JetBrains Mono", monospace;
+        --sans: "Space Grotesk", sans-serif;
+        --display: "Bebas Neue", sans-serif;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
 
-/* ── NOISE ── */
-body::before{content:'';position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity:.04;pointer-events:none;z-index:0;}
+      /* ── NOISE ── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        opacity: 0.04;
+        pointer-events: none;
+        z-index: 0;
+      }
 
-/* ── SCAN LINE — fires once on load ── */
-.scan-line{position:fixed;top:-2px;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(45,143,255,.5),transparent);
-  pointer-events:none;z-index:500;opacity:0;
-  animation:scanOnce 1.6s .3s ease-out forwards;}
-@keyframes scanOnce{0%{opacity:.6;top:-2px}80%{opacity:.3}100%{opacity:0;top:100vh}}
+      /* ── SCAN LINE — fires once on load ── */
+      .scan-line {
+        position: fixed;
+        top: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(45, 143, 255, 0.5),
+          transparent
+        );
+        pointer-events: none;
+        z-index: 500;
+        opacity: 0;
+        animation: scanOnce 1.6s 0.3s ease-out forwards;
+      }
+      @keyframes scanOnce {
+        0% {
+          opacity: 0.6;
+          top: -2px;
+        }
+        80% {
+          opacity: 0.3;
+        }
+        100% {
+          opacity: 0;
+          top: 100vh;
+        }
+      }
 
-/* ── SECTION SCANLINE on scroll (JS adds .scanning) ── */
-.section-scan{position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--blue-line),transparent);
-  transform:translateY(-2px);opacity:0;pointer-events:none;z-index:10;}
-section.scanning .section-scan{animation:secScan .8s ease-out forwards;}
-@keyframes secScan{0%{opacity:.7;transform:translateY(0)}100%{opacity:0;transform:translateY(60px)}}
+      /* ── SECTION SCANLINE on scroll (JS adds .scanning) ── */
+      .section-scan {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--blue-line),
+          transparent
+        );
+        transform: translateY(-2px);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 10;
+      }
+      section.scanning .section-scan {
+        animation: secScan 0.8s ease-out forwards;
+      }
+      @keyframes secScan {
+        0% {
+          opacity: 0.7;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(60px);
+        }
+      }
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.1rem 3rem;transition:all .35s;}
-nav.scrolled{background:rgba(8,11,15,.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.nav-logo{font-family:var(--display);font-size:1.9rem;letter-spacing:.04em;color:var(--text);text-decoration:none;line-height:1;}
-.nav-logo .r{color:var(--red);} .nav-logo .b{color:var(--blue);}
-.nav-links{display:flex;gap:2.5rem;list-style:none;}
-.nav-links a{font-family:var(--mono);font-size:.72rem;color:var(--text2);text-decoration:none;
-  letter-spacing:.1em;text-transform:uppercase;transition:color .2s;position:relative;}
-.nav-links a::after{content:'_';position:absolute;right:-8px;bottom:0;
-  color:var(--blue);opacity:0;font-weight:700;transition:opacity .15s;
-  animation:blink-cur 1s step-end infinite;}
-.nav-links a:hover{color:var(--blue);}
-.nav-links a:hover::after{opacity:1;}
-@keyframes blink-cur{0%,100%{opacity:1}50%{opacity:0}}
-.nav-cta{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--red);border:1px solid var(--red);padding:.5rem 1.2rem;
-  clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
-  text-decoration:none;transition:background .2s,color .2s;}
-.nav-cta:hover{background:var(--red);color:#fff;}
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.1rem 3rem;
+        transition: all 0.35s;
+      }
+      nav.scrolled {
+        background: rgba(8, 11, 15, 0.93);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-logo {
+        font-family: var(--display);
+        font-size: 1.9rem;
+        letter-spacing: 0.04em;
+        color: var(--text);
+        text-decoration: none;
+        line-height: 1;
+      }
+      .nav-logo .r {
+        color: var(--red);
+      }
+      .nav-logo .b {
+        color: var(--blue);
+      }
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--text2);
+        text-decoration: none;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+        position: relative;
+      }
+      .nav-links a::after {
+        content: "_";
+        position: absolute;
+        right: -8px;
+        bottom: 0;
+        color: var(--blue);
+        opacity: 0;
+        font-weight: 700;
+        transition: opacity 0.15s;
+        animation: blink-cur 1s step-end infinite;
+      }
+      .nav-links a:hover {
+        color: var(--blue);
+      }
+      .nav-links a:hover::after {
+        opacity: 1;
+      }
+      @keyframes blink-cur {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+      .nav-cta {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--red);
+        border: 1px solid var(--red);
+        padding: 0.5rem 1.2rem;
+        clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--red);
+        color: #fff;
+      }
 
-/* ── HERO ── */
-#hero{min-height:100vh;display:flex;align-items:center;padding:8rem 3rem 6rem;position:relative;overflow:hidden;}
+      /* ── HERO ── */
+      #hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 8rem 3rem 6rem;
+        position: relative;
+        overflow: hidden;
+      }
 
-/* diagonal slice */
-.hero-slice{position:absolute;top:0;right:-5%;width:52%;height:100%;
-  background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%);
-  clip-path:polygon(12% 0,100% 0,100% 100%,0% 100%);z-index:0;}
-.hero-slice::before{content:'';position:absolute;inset:0;
-  background-image:linear-gradient(var(--border) 1px,transparent 1px),
-                   linear-gradient(90deg,var(--border) 1px,transparent 1px);
-  background-size:40px 40px;opacity:.55;}
+      /* diagonal slice */
+      .hero-slice {
+        position: absolute;
+        top: 0;
+        right: -5%;
+        width: 52%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
+        clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+        z-index: 0;
+      }
+      .hero-slice::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(var(--border) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-size: 40px 40px;
+        opacity: 0.55;
+      }
 
-/* faint code snippet background */
-.hero-code-bg{position:absolute;top:8%;right:3%;width:46%;height:84%;
-  font-family:var(--mono);font-size:.68rem;line-height:1.8;
-  color:rgba(45,143,255,.06);white-space:pre;pointer-events:none;z-index:1;
-  overflow:hidden;letter-spacing:.02em;user-select:none;}
+      /* faint code snippet background */
+      .hero-code-bg {
+        position: absolute;
+        top: 8%;
+        right: 3%;
+        width: 46%;
+        height: 84%;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        line-height: 1.8;
+        color: rgba(45, 143, 255, 0.06);
+        white-space: pre;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+        letter-spacing: 0.02em;
+        user-select: none;
+      }
 
-/* bracket corners */
-.bk{position:absolute;width:44px;height:44px;z-index:2;}
-.bk-tl{top:5.5rem;left:3rem;border-top:2px solid var(--blue);border-left:2px solid var(--blue);}
-.bk-tr{top:5.5rem;right:3rem;border-top:2px solid var(--red);border-right:2px solid var(--red);}
-.bk-bl{bottom:4rem;left:3rem;border-bottom:2px solid var(--red);border-left:2px solid var(--red);}
-.bk-br{bottom:4rem;right:3rem;border-bottom:2px solid var(--blue);border-right:2px solid var(--blue);}
+      /* bracket corners */
+      .bk {
+        position: absolute;
+        width: 44px;
+        height: 44px;
+        z-index: 2;
+      }
+      .bk-tl {
+        top: 5.5rem;
+        left: 3rem;
+        border-top: 2px solid var(--blue);
+        border-left: 2px solid var(--blue);
+      }
+      .bk-tr {
+        top: 5.5rem;
+        right: 3rem;
+        border-top: 2px solid var(--red);
+        border-right: 2px solid var(--red);
+      }
+      .bk-bl {
+        bottom: 4rem;
+        left: 3rem;
+        border-bottom: 2px solid var(--red);
+        border-left: 2px solid var(--red);
+      }
+      .bk-br {
+        bottom: 4rem;
+        right: 3rem;
+        border-bottom: 2px solid var(--blue);
+        border-right: 2px solid var(--blue);
+      }
 
-/* orbs */
-.orb-r{position:absolute;top:-10%;left:-5%;width:55%;height:80%;
-  background:radial-gradient(ellipse at 30% 40%,rgba(255,45,31,.06) 0%,transparent 65%);
-  pointer-events:none;z-index:0;}
-.orb-b{position:absolute;top:20%;right:5%;width:40%;height:60%;
-  background:radial-gradient(ellipse,rgba(45,143,255,.07) 0%,transparent 65%);
-  pointer-events:none;z-index:0;}
+      /* orbs */
+      .orb-r {
+        position: absolute;
+        top: -10%;
+        left: -5%;
+        width: 55%;
+        height: 80%;
+        background: radial-gradient(
+          ellipse at 30% 40%,
+          rgba(255, 45, 31, 0.06) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+      .orb-b {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+        width: 40%;
+        height: 60%;
+        background: radial-gradient(
+          ellipse,
+          rgba(45, 143, 255, 0.07) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
 
-.hero-inner{position:relative;z-index:2;max-width:800px;}
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+      }
 
-.hero-eyebrow{display:flex;align-items:center;gap:.75rem;font-family:var(--mono);
-  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);
-  margin-bottom:1.25rem;opacity:0;animation:fadeUp .6s .15s forwards;}
-.eyebrow-line{width:28px;height:1px;background:var(--blue);}
-.eyebrow-tri{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:7px solid var(--blue);}
+      .hero-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--blue);
+        margin-bottom: 1.25rem;
+        opacity: 0;
+        animation: fadeUp 0.6s 0.15s forwards;
+      }
+      .eyebrow-line {
+        width: 28px;
+        height: 1px;
+        background: var(--blue);
+      }
+      .eyebrow-tri {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 7px solid var(--blue);
+      }
 
-.hero-role{font-family:var(--display);font-size:clamp(1rem,2vw,1.5rem);letter-spacing:.35em;
-  color:var(--text3);text-transform:uppercase;margin-bottom:.4rem;
-  opacity:0;animation:fadeUp .5s .25s forwards;}
+      .hero-role {
+        font-family: var(--display);
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        letter-spacing: 0.35em;
+        color: var(--text3);
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        opacity: 0;
+        animation: fadeUp 0.5s 0.25s forwards;
+      }
 
-.hero-headline{font-family:var(--display);font-size:clamp(4rem,9.5vw,9rem);
-  line-height:.92;letter-spacing:.01em;color:var(--text);margin-bottom:1rem;
-  opacity:0;animation:fadeUp .7s .35s forwards;}
-.hero-headline .stroke{-webkit-text-stroke:2px var(--red);color:transparent;}
-.hero-headline .bw{color:var(--blue);}
+      .hero-headline {
+        font-family: var(--display);
+        font-size: clamp(4rem, 9.5vw, 9rem);
+        line-height: 0.92;
+        letter-spacing: 0.01em;
+        color: var(--text);
+        margin-bottom: 1rem;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.35s forwards;
+      }
+      .hero-headline .stroke {
+        -webkit-text-stroke: 2px var(--red);
+        color: transparent;
+      }
+      .hero-headline .bw {
+        color: var(--blue);
+      }
 
-.hero-tagline{font-family:var(--mono);font-size:.8rem;color:var(--text2);
-  letter-spacing:.05em;margin-bottom:.75rem;opacity:0;animation:fadeUp .6s .5s forwards;}
-.hero-tagline .tr{color:var(--red);} .hero-tagline .tb{color:var(--blue);}
+      .hero-tagline {
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        color: var(--text2);
+        letter-spacing: 0.05em;
+        margin-bottom: 0.75rem;
+        opacity: 0;
+        animation: fadeUp 0.6s 0.5s forwards;
+      }
+      .hero-tagline .tr {
+        color: var(--red);
+      }
+      .hero-tagline .tb {
+        color: var(--blue);
+      }
 
-.hero-sub{font-size:1rem;color:var(--text2);max-width:480px;line-height:1.8;
-  margin-bottom:2.75rem;font-weight:300;opacity:0;animation:fadeUp .6s .6s forwards;}
+      .hero-sub {
+        font-size: 1rem;
+        color: var(--text2);
+        max-width: 480px;
+        line-height: 1.8;
+        margin-bottom: 2.75rem;
+        font-weight: 300;
+        opacity: 0;
+        animation: fadeUp 0.6s 0.6s forwards;
+      }
 
-.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .6s .72s forwards;}
+      .hero-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        opacity: 0;
+        animation: fadeUp 0.6s 0.72s forwards;
+      }
 
-/* buttons */
-.btn-red{display:inline-flex;align-items:center;gap:.6rem;background:var(--red);color:#fff;
-  font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
-  padding:.9rem 1.8rem;text-decoration:none;
-  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
-  transition:background .2s,transform .15s,box-shadow .2s;position:relative;overflow:hidden;}
-.btn-red::after{content:'_';margin-left:2px;animation:blink-cur 1s step-end infinite;opacity:0;transition:opacity .15s;}
-.btn-red:hover{background:var(--red-dim);transform:translateY(-2px);box-shadow:0 10px 35px var(--red-glow);}
-.btn-red:hover::after{opacity:1;}
-.btn-blue{display:inline-flex;align-items:center;gap:.6rem;background:transparent;color:var(--blue);
-  font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
-  padding:.9rem 1.8rem;text-decoration:none;border:1px solid var(--blue-line);
-  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
-  transition:background .2s,box-shadow .2s;position:relative;}
-.btn-blue::after{content:'_';margin-left:2px;animation:blink-cur 1s step-end infinite;opacity:0;transition:opacity .15s;}
-.btn-blue:hover{background:var(--blue-soft);box-shadow:0 10px 35px var(--blue-glow);}
-.btn-blue:hover::after{opacity:1;}
+      /* buttons */
+      .btn-red {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--red);
+        color: #fff;
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.9rem 1.8rem;
+        text-decoration: none;
+        clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+        transition:
+          background 0.2s,
+          transform 0.15s,
+          box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-red::after {
+        content: "_";
+        margin-left: 2px;
+        animation: blink-cur 1s step-end infinite;
+        opacity: 0;
+        transition: opacity 0.15s;
+      }
+      .btn-red:hover {
+        background: var(--red-dim);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 35px var(--red-glow);
+      }
+      .btn-red:hover::after {
+        opacity: 1;
+      }
+      .btn-blue {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: transparent;
+        color: var(--blue);
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.9rem 1.8rem;
+        text-decoration: none;
+        border: 1px solid var(--blue-line);
+        clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+        transition:
+          background 0.2s,
+          box-shadow 0.2s;
+        position: relative;
+      }
+      .btn-blue::after {
+        content: "_";
+        margin-left: 2px;
+        animation: blink-cur 1s step-end infinite;
+        opacity: 0;
+        transition: opacity 0.15s;
+      }
+      .btn-blue:hover {
+        background: var(--blue-soft);
+        box-shadow: 0 10px 35px var(--blue-glow);
+      }
+      .btn-blue:hover::after {
+        opacity: 1;
+      }
 
-/* small variants */
-.btn-red.sm,.btn-blue.sm{font-size:.72rem;padding:.7rem 1.4rem;}
+      /* small variants */
+      .btn-red.sm,
+      .btn-blue.sm {
+        font-size: 0.72rem;
+        padding: 0.7rem 1.4rem;
+      }
 
-.hero-scroll{position:absolute;bottom:3rem;left:3rem;display:flex;align-items:center;gap:1rem;
-  opacity:0;animation:fadeUp .6s .9s forwards;z-index:2;}
-.hs-line{width:60px;height:1px;background:linear-gradient(90deg,var(--blue),transparent);}
-.hs-txt{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);}
-.hero-ctr{position:absolute;bottom:3rem;right:3rem;font-family:var(--display);font-size:6rem;color:var(--border);line-height:1;z-index:1;user-select:none;}
+      .hero-scroll {
+        position: absolute;
+        bottom: 3rem;
+        left: 3rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        opacity: 0;
+        animation: fadeUp 0.6s 0.9s forwards;
+        z-index: 2;
+      }
+      .hs-line {
+        width: 60px;
+        height: 1px;
+        background: linear-gradient(90deg, var(--blue), transparent);
+      }
+      .hs-txt {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text3);
+      }
+      .hero-ctr {
+        position: absolute;
+        bottom: 3rem;
+        right: 3rem;
+        font-family: var(--display);
+        font-size: 6rem;
+        color: var(--border);
+        line-height: 1;
+        z-index: 1;
+        user-select: none;
+      }
 
-/* ── SECTIONS ── */
-section{padding:7rem 3rem;position:relative;}
-.sh{display:flex;align-items:center;gap:1.25rem;margin-bottom:4.5rem;}
-.snum{font-family:var(--mono);font-size:.62rem;color:var(--blue);letter-spacing:.14em;
-  padding:.2rem .5rem;border:1px solid var(--blue-line);background:var(--blue-soft);}
-/* matrix reveal title */
-.stitle{font-family:var(--display);font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.02em;color:var(--text);}
-.stitle .r{color:var(--red);}
-.sline{flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent);max-width:260px;}
+      /* ── SECTIONS ── */
+      section {
+        padding: 7rem 3rem;
+        position: relative;
+      }
+      .sh {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        margin-bottom: 4.5rem;
+      }
+      .snum {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--blue);
+        letter-spacing: 0.14em;
+        padding: 0.2rem 0.5rem;
+        border: 1px solid var(--blue-line);
+        background: var(--blue-soft);
+      }
+      /* matrix reveal title */
+      .stitle {
+        font-family: var(--display);
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        letter-spacing: 0.02em;
+        color: var(--text);
+      }
+      .stitle .r {
+        color: var(--red);
+      }
+      .sline {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, var(--border2), transparent);
+        max-width: 260px;
+      }
 
-/* ── ABOUT ── */
-#about{background:var(--bg2);}
-#about::before{content:'';position:absolute;top:-1px;left:0;right:0;height:60px;
-  background:var(--bg);clip-path:polygon(0 0,100% 0,100% 0,0 100%);z-index:1;}
-.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start;position:relative;z-index:2;}
-.at p{color:var(--text2);font-weight:300;line-height:1.95;margin-bottom:1.25rem;font-size:.97rem;}
-.at p strong{color:var(--text);font-weight:600;}
-.at .r{color:var(--red);} .at .b{color:var(--blue);}
-.at .planned{font-family:var(--mono);font-size:.65rem;color:var(--text3);
-  border:1px solid var(--border2);padding:.15rem .45rem;letter-spacing:.06em;
-  text-transform:uppercase;vertical-align:middle;margin-left:.4rem;}
+      /* ── ABOUT ── */
+      #about {
+        background: var(--bg2);
+      }
+      #about::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: var(--bg);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+        z-index: 1;
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 5rem;
+        align-items: start;
+        position: relative;
+        z-index: 2;
+      }
+      .at p {
+        color: var(--text2);
+        font-weight: 300;
+        line-height: 1.95;
+        margin-bottom: 1.25rem;
+        font-size: 0.97rem;
+      }
+      .at p strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .at .r {
+        color: var(--red);
+      }
+      .at .b {
+        color: var(--blue);
+      }
+      .at .planned {
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        color: var(--text3);
+        border: 1px solid var(--border2);
+        padding: 0.15rem 0.45rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        vertical-align: middle;
+        margin-left: 0.4rem;
+      }
 
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);
-  border:1px solid var(--border);margin-top:2.5rem;}
-.stat{background:var(--surface);padding:1.25rem;text-align:center;position:relative;overflow:hidden;transition:background .2s;}
-.stat:hover{background:var(--bg3);}
-.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue);
-  transform:scaleX(0);transform-origin:left;transition:transform .3s;}
-.stat:hover::before{transform:scaleX(1);}
-.stat-n{font-family:var(--display);font-size:2.8rem;color:var(--blue);line-height:1;margin-bottom:.2rem;}
-.stat-n.r{color:var(--red);}
-.stat-l{font-family:var(--mono);font-size:.6rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;}
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        margin-top: 2.5rem;
+      }
+      .stat {
+        background: var(--surface);
+        padding: 1.25rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: background 0.2s;
+      }
+      .stat:hover {
+        background: var(--bg3);
+      }
+      .stat::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--blue);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s;
+      }
+      .stat:hover::before {
+        transform: scaleX(1);
+      }
+      .stat-n {
+        font-family: var(--display);
+        font-size: 2.8rem;
+        color: var(--blue);
+        line-height: 1;
+        margin-bottom: 0.2rem;
+      }
+      .stat-n.r {
+        color: var(--red);
+      }
+      .stat-l {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--text3);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
 
-.stack-blk{display:flex;flex-direction:column;gap:1.5rem;}
-.sr-hdr{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;}
-.sr-lbl{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);}
-.sr-tick{flex:1;height:1px;background:var(--border);}
-.pills{display:flex;flex-wrap:wrap;gap:.4rem;}
-.pill{font-family:var(--mono);font-size:.7rem;color:var(--text2);background:var(--surface);
-  border:1px solid var(--border);padding:.28rem .7rem;letter-spacing:.02em;
-  transition:all .2s;position:relative;overflow:hidden;}
-.pill::before{content:'';position:absolute;inset:0;background:var(--blue-soft);opacity:0;transition:opacity .2s;}
-.pill:hover{color:var(--blue);border-color:var(--blue-line);}
-.pill:hover::before{opacity:1;}
+      .stack-blk {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .sr-hdr {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.6rem;
+      }
+      .sr-lbl {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text3);
+      }
+      .sr-tick {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .pill {
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        color: var(--text2);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 0.28rem 0.7rem;
+        letter-spacing: 0.02em;
+        transition: all 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .pill::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--blue-soft);
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .pill:hover {
+        color: var(--blue);
+        border-color: var(--blue-line);
+      }
+      .pill:hover::before {
+        opacity: 1;
+      }
 
-/* ── PROJECTS ── */
-#projects{background:var(--bg);}
-#projects::before{content:'';position:absolute;top:-1px;left:0;right:0;height:60px;
-  background:var(--bg2);clip-path:polygon(0 0,100% 0,100% 0,0 100%);z-index:1;}
+      /* ── PROJECTS ── */
+      #projects {
+        background: var(--bg);
+      }
+      #projects::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: var(--bg2);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+        z-index: 1;
+      }
 
-/* featured */
-.featured{position:relative;margin-bottom:2rem;z-index:2;}
-.feat-bg-num{position:absolute;top:-3rem;right:-1rem;font-family:var(--display);
-  font-size:20rem;color:var(--border);line-height:1;pointer-events:none;user-select:none;z-index:0;}
-.feat-card{background:var(--bg2);border:1px solid var(--border2);position:relative;overflow:hidden;z-index:1;}
-.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--red),var(--blue));}
-.feat-card::after{content:'';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;
-  border:1px solid var(--blue-line);transform:rotate(20deg);pointer-events:none;}
-.feat-inner{display:grid;grid-template-columns:1.1fr 1fr;}
-.feat-l{padding:3rem;border-right:1px solid var(--border);}
-.feat-r{padding:3rem;}
-.feat-flag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.62rem;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--red);
-  border:1px solid rgba(255,45,31,.25);background:var(--red-soft);padding:.3rem .8rem;margin-bottom:1.25rem;}
-.ff-dot{width:5px;height:5px;background:var(--red);border-radius:50%;animation:blink 2s infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.feat-name{font-family:var(--display);font-size:3.5rem;letter-spacing:.02em;color:var(--text);line-height:1;margin-bottom:.3rem;}
-.feat-sub{font-family:var(--mono);font-size:.78rem;color:var(--blue);letter-spacing:.08em;margin-bottom:1.25rem;}
-.feat-desc{font-size:.92rem;color:var(--text2);line-height:1.85;font-weight:300;margin-bottom:2rem;}
-.feat-links{display:flex;gap:.75rem;flex-wrap:wrap;}
+      /* featured */
+      .featured {
+        position: relative;
+        margin-bottom: 2rem;
+        z-index: 2;
+      }
+      .feat-bg-num {
+        position: absolute;
+        top: -3rem;
+        right: -1rem;
+        font-family: var(--display);
+        font-size: 20rem;
+        color: var(--border);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+        z-index: 0;
+      }
+      .feat-card {
+        background: var(--bg2);
+        border: 1px solid var(--border2);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .feat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--red), var(--blue));
+      }
+      .feat-card::after {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        right: -40px;
+        width: 200px;
+        height: 200px;
+        border: 1px solid var(--blue-line);
+        transform: rotate(20deg);
+        pointer-events: none;
+      }
+      .feat-inner {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+      }
+      .feat-l {
+        padding: 3rem;
+        border-right: 1px solid var(--border);
+      }
+      .feat-r {
+        padding: 3rem;
+      }
+      .feat-flag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--red);
+        border: 1px solid rgba(255, 45, 31, 0.25);
+        background: var(--red-soft);
+        padding: 0.3rem 0.8rem;
+        margin-bottom: 1.25rem;
+      }
+      .ff-dot {
+        width: 5px;
+        height: 5px;
+        background: var(--red);
+        border-radius: 50%;
+        animation: blink 2s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
+        }
+      }
+      .feat-name {
+        font-family: var(--display);
+        font-size: 3.5rem;
+        letter-spacing: 0.02em;
+        color: var(--text);
+        line-height: 1;
+        margin-bottom: 0.3rem;
+      }
+      .feat-sub {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        color: var(--blue);
+        letter-spacing: 0.08em;
+        margin-bottom: 1.25rem;
+      }
+      .feat-desc {
+        font-size: 0.92rem;
+        color: var(--text2);
+        line-height: 1.85;
+        font-weight: 300;
+        margin-bottom: 2rem;
+      }
+      .feat-links {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
 
-.feat-items{list-style:none;}
-.feat-item{padding:.9rem 0;border-bottom:1px solid var(--border);
-  display:grid;grid-template-columns:3.5rem 1fr;gap:.9rem;align-items:start;}
-.feat-item:first-child{padding-top:0;} .feat-item:last-child{border-bottom:none;padding-bottom:0;}
-.ftag{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
-  padding:.2rem .4rem;border:1px solid var(--blue-line);color:var(--blue);
-  background:var(--blue-soft);text-align:center;margin-top:.18rem;}
-.ftag.red{border-color:rgba(255,45,31,.3);color:var(--red);background:var(--red-soft);}
-.fbody{font-size:.84rem;color:var(--text2);line-height:1.65;font-weight:300;}
-.fbody strong{color:var(--text);font-weight:600;}
-.fbody .planned{font-family:var(--mono);font-size:.6rem;color:var(--text3);
-  border:1px solid var(--border2);padding:.1rem .4rem;letter-spacing:.06em;
-  text-transform:uppercase;vertical-align:middle;margin-left:.35rem;}
-.fbody .in-progress{font-family:var(--mono);font-size:.6rem;color:var(--blue);
-  border:1px solid var(--blue-line);background:var(--blue-soft);
-  padding:.1rem .4rem;letter-spacing:.06em;text-transform:uppercase;
-  vertical-align:middle;margin-left:.35rem;}
+      .feat-items {
+        list-style: none;
+      }
+      .feat-item {
+        padding: 0.9rem 0;
+        border-bottom: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: 3.5rem 1fr;
+        gap: 0.9rem;
+        align-items: start;
+      }
+      .feat-item:first-child {
+        padding-top: 0;
+      }
+      .feat-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .ftag {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.4rem;
+        border: 1px solid var(--blue-line);
+        color: var(--blue);
+        background: var(--blue-soft);
+        text-align: center;
+        margin-top: 0.18rem;
+      }
+      .ftag.red {
+        border-color: rgba(255, 45, 31, 0.3);
+        color: var(--red);
+        background: var(--red-soft);
+      }
+      .fbody {
+        font-size: 0.84rem;
+        color: var(--text2);
+        line-height: 1.65;
+        font-weight: 300;
+      }
+      .fbody strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .fbody .planned {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--text3);
+        border: 1px solid var(--border2);
+        padding: 0.1rem 0.4rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        vertical-align: middle;
+        margin-left: 0.35rem;
+      }
+      .fbody .in-progress {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--blue);
+        border: 1px solid var(--blue-line);
+        background: var(--blue-soft);
+        padding: 0.1rem 0.4rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        vertical-align: middle;
+        margin-left: 0.35rem;
+      }
 
-/* project grid */
-.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);
-  border:1px solid var(--border);position:relative;z-index:2;}
-.pcard{background:var(--bg2);padding:2rem;transition:background .25s;position:relative;overflow:hidden;}
-.pcard:hover{background:var(--bg3);}
-.pcard::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;
-  border-width:0 28px 28px 0;border-color:transparent var(--bg) transparent transparent;transition:border-color .25s;}
-.pcard:hover::before{border-color:transparent var(--bg3) transparent transparent;}
-.pcard::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--blue),var(--red));
-  transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
-.pcard:hover::after{transform:scaleX(1);}
-.plabel{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:.6rem;}
-.pname{font-family:var(--display);font-size:1.6rem;letter-spacing:.01em;color:var(--text);margin-bottom:.6rem;line-height:1.1;}
-.pdesc{font-size:.86rem;color:#b0bac8;line-height:1.7;font-weight:400;margin-bottom:.9rem;}
-.pbullets{list-style:none;margin-bottom:1.1rem;}
-.pbullets li{font-size:.8rem;color:#8a95a8;padding:.22rem 0 .22rem 1.1rem;position:relative;line-height:1.6;}
-.pbullets li::before{content:'›';position:absolute;left:0;color:var(--blue);font-size:.9rem;}
-.pbullets li .planned{font-family:var(--mono);font-size:.58rem;color:var(--text3);
-  border:1px solid var(--border2);padding:.08rem .35rem;letter-spacing:.06em;
-  text-transform:uppercase;vertical-align:middle;margin-left:.3rem;}
-.pstack{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem;}
-.mtag{font-family:var(--mono);font-size:.6rem;color:var(--text3);border:1px solid var(--border2);padding:.18rem .45rem;letter-spacing:.03em;}
-.plink{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--text3);text-decoration:none;transition:color .2s;display:inline-flex;align-items:center;gap:.3rem;position:relative;}
-.plink::after{content:'_';animation:blink-cur 1s step-end infinite;opacity:0;transition:opacity .15s;}
-.plink:hover{color:var(--blue);}
-.plink:hover::after{opacity:1;}
+      /* project grid */
+      .pgrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        position: relative;
+        z-index: 2;
+      }
+      .pcard {
+        background: var(--bg2);
+        padding: 2rem;
+        transition: background 0.25s;
+        position: relative;
+        overflow: hidden;
+      }
+      .pcard:hover {
+        background: var(--bg3);
+      }
+      .pcard::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 28px 28px 0;
+        border-color: transparent var(--bg) transparent transparent;
+        transition: border-color 0.25s;
+      }
+      .pcard:hover::before {
+        border-color: transparent var(--bg3) transparent transparent;
+      }
+      .pcard::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--blue), var(--red));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s ease;
+      }
+      .pcard:hover::after {
+        transform: scaleX(1);
+      }
+      .plabel {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--blue);
+        margin-bottom: 0.6rem;
+      }
+      .pname {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        letter-spacing: 0.01em;
+        color: var(--text);
+        margin-bottom: 0.6rem;
+        line-height: 1.1;
+      }
+      .pdesc {
+        font-size: 0.86rem;
+        color: #b0bac8;
+        line-height: 1.7;
+        font-weight: 400;
+        margin-bottom: 0.9rem;
+      }
+      .pbullets {
+        list-style: none;
+        margin-bottom: 1.1rem;
+      }
+      .pbullets li {
+        font-size: 0.8rem;
+        color: #8a95a8;
+        padding: 0.22rem 0 0.22rem 1.1rem;
+        position: relative;
+        line-height: 1.6;
+      }
+      .pbullets li::before {
+        content: "›";
+        position: absolute;
+        left: 0;
+        color: var(--blue);
+        font-size: 0.9rem;
+      }
+      .pbullets li .planned {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--text3);
+        border: 1px solid var(--border2);
+        padding: 0.08rem 0.35rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        vertical-align: middle;
+        margin-left: 0.3rem;
+      }
+      .pstack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        margin-bottom: 1rem;
+      }
+      .mtag {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--text3);
+        border: 1px solid var(--border2);
+        padding: 0.18rem 0.45rem;
+        letter-spacing: 0.03em;
+      }
+      .plink {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text3);
+        text-decoration: none;
+        transition: color 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        position: relative;
+      }
+      .plink::after {
+        content: "_";
+        animation: blink-cur 1s step-end infinite;
+        opacity: 0;
+        transition: opacity 0.15s;
+      }
+      .plink:hover {
+        color: var(--blue);
+      }
+      .plink:hover::after {
+        opacity: 1;
+      }
 
-/* ── CONTACT ── */
-#contact{background:var(--bg2);text-align:center;overflow:hidden;}
-#contact::before{content:'';position:absolute;top:-1px;left:0;right:0;height:60px;
-  background:var(--bg);clip-path:polygon(0 0,100% 0,100% 0,0 100%);z-index:1;}
-.cc{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;pointer-events:none;z-index:0;}
-.cc::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);}
-.cc::after{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--border),transparent);}
-.cdot{position:absolute;width:6px;height:6px;border-radius:50%;z-index:2;}
-.cdot-1{top:6rem;left:6rem;background:var(--red);box-shadow:0 0 12px var(--red-glow);}
-.cdot-2{top:6rem;right:6rem;background:var(--blue);box-shadow:0 0 12px var(--blue-glow);}
-.cdot-3{bottom:6rem;left:6rem;background:var(--blue);box-shadow:0 0 12px var(--blue-glow);}
-.cdot-4{bottom:6rem;right:6rem;background:var(--red);box-shadow:0 0 12px var(--red-glow);}
-.ci{max-width:660px;margin:0 auto;position:relative;z-index:3;}
-.avail{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.68rem;
-  letter-spacing:.12em;text-transform:uppercase;color:#4ade80;
-  background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.2);
-  padding:.4rem 1.1rem;margin-bottom:2.5rem;}
-.avail::before{content:'';width:6px;height:6px;background:#4ade80;border-radius:50%;animation:blink 2s infinite;}
-.chtitle{font-family:var(--display);font-size:clamp(3rem,7vw,6.5rem);letter-spacing:.03em;line-height:.92;margin-bottom:1.5rem;}
-.chtitle .r{color:var(--red);} .chtitle .b{color:var(--blue);}
-.chsub{font-size:1rem;color:var(--text2);font-weight:300;margin-bottom:3rem;line-height:1.85;}
-.clinks{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:4rem;}
-.fdiv{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;}
-.fdiv-line{flex:1;height:1px;background:var(--border);}
-.fdiv-diamond{width:6px;height:6px;background:var(--blue);transform:rotate(45deg);}
-.footer-row{display:flex;justify-content:space-between;align-items:center;}
-.fcopy{font-family:var(--mono);font-size:.68rem;color:var(--text3);letter-spacing:.05em;}
-.fcopy .r{color:var(--red);}
-.flinks{display:flex;gap:1.5rem;}
-.flinks a{font-family:var(--mono);font-size:.68rem;color:var(--text3);text-decoration:none;
-  letter-spacing:.08em;text-transform:uppercase;transition:color .2s;position:relative;}
-.flinks a::after{content:'_';animation:blink-cur 1s step-end infinite;opacity:0;transition:opacity .15s;}
-.flinks a:hover{color:var(--blue);}
-.flinks a:hover::after{opacity:1;}
+      /* ── CONTACT ── */
+      #contact {
+        background: var(--bg2);
+        text-align: center;
+        overflow: hidden;
+      }
+      #contact::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: var(--bg);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+        z-index: 1;
+      }
+      .cc {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 600px;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .cc::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--border),
+          transparent
+        );
+      }
+      .cc::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(
+          180deg,
+          transparent,
+          var(--border),
+          transparent
+        );
+      }
+      .cdot {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        z-index: 2;
+      }
+      .cdot-1 {
+        top: 6rem;
+        left: 6rem;
+        background: var(--red);
+        box-shadow: 0 0 12px var(--red-glow);
+      }
+      .cdot-2 {
+        top: 6rem;
+        right: 6rem;
+        background: var(--blue);
+        box-shadow: 0 0 12px var(--blue-glow);
+      }
+      .cdot-3 {
+        bottom: 6rem;
+        left: 6rem;
+        background: var(--blue);
+        box-shadow: 0 0 12px var(--blue-glow);
+      }
+      .cdot-4 {
+        bottom: 6rem;
+        right: 6rem;
+        background: var(--red);
+        box-shadow: 0 0 12px var(--red-glow);
+      }
+      .ci {
+        max-width: 660px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 3;
+      }
+      .avail {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #4ade80;
+        background: rgba(74, 222, 128, 0.06);
+        border: 1px solid rgba(74, 222, 128, 0.2);
+        padding: 0.4rem 1.1rem;
+        margin-bottom: 2.5rem;
+      }
+      .avail::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: #4ade80;
+        border-radius: 50%;
+        animation: blink 2s infinite;
+      }
+      .chtitle {
+        font-family: var(--display);
+        font-size: clamp(3rem, 7vw, 6.5rem);
+        letter-spacing: 0.03em;
+        line-height: 0.92;
+        margin-bottom: 1.5rem;
+      }
+      .chtitle .r {
+        color: var(--red);
+      }
+      .chtitle .b {
+        color: var(--blue);
+      }
+      .chsub {
+        font-size: 1rem;
+        color: var(--text2);
+        font-weight: 300;
+        margin-bottom: 3rem;
+        line-height: 1.85;
+      }
+      .clinks {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 4rem;
+      }
+      .fdiv {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .fdiv-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .fdiv-diamond {
+        width: 6px;
+        height: 6px;
+        background: var(--blue);
+        transform: rotate(45deg);
+      }
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .fcopy {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        color: var(--text3);
+        letter-spacing: 0.05em;
+      }
+      .fcopy .r {
+        color: var(--red);
+      }
+      .flinks {
+        display: flex;
+        gap: 1.5rem;
+      }
+      .flinks a {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        color: var(--text3);
+        text-decoration: none;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+        position: relative;
+      }
+      .flinks a::after {
+        content: "_";
+        animation: blink-cur 1s step-end infinite;
+        opacity: 0;
+        transition: opacity 0.15s;
+      }
+      .flinks a:hover {
+        color: var(--blue);
+      }
+      .flinks a:hover::after {
+        opacity: 1;
+      }
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
-.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .65s ease,transform .65s ease;}
-.reveal-r{opacity:0;transform:translateX(28px);transition:opacity .65s ease,transform .65s ease;}
-.reveal.v,.reveal-l.v,.reveal-r.v{opacity:1;transform:none;}
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(22px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal-l {
+        opacity: 0;
+        transform: translateX(-28px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal-r {
+        opacity: 0;
+        transform: translateX(28px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal.v,
+      .reveal-l.v,
+      .reveal-r.v {
+        opacity: 1;
+        transform: none;
+      }
 
-/* ── RESPONSIVE ── */
-@media(max-width:960px){
-  nav{padding:1.1rem 1.5rem;}
-  .nav-links{display:none;}
-  #hero{padding:7rem 1.5rem 5rem;}
-  section{padding:5rem 1.5rem;}
-  .about-grid{grid-template-columns:1fr;gap:3rem;}
-  .feat-inner{grid-template-columns:1fr;}
-  .feat-l{border-right:none;border-bottom:1px solid var(--border);padding:2rem;}
-  .feat-r{padding:2rem;}
-  .pgrid{grid-template-columns:1fr;}
-  .footer-row{flex-direction:column;gap:1rem;text-align:center;}
-  .hero-ctr,.bk,.feat-bg-num,.cdot{display:none;}
-  .hero-code-bg{display:none;}
-}
-</style>
-</head>
-<body>
+      /* ── RESPONSIVE ── */
+      @media (max-width: 960px) {
+        nav {
+          padding: 1.1rem 1.5rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        #hero {
+          padding: 7rem 1.5rem 5rem;
+        }
+        section {
+          padding: 5rem 1.5rem;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        .feat-inner {
+          grid-template-columns: 1fr;
+        }
+        .feat-l {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+          padding: 2rem;
+        }
+        .feat-r {
+          padding: 2rem;
+        }
+        .pgrid {
+          grid-template-columns: 1fr;
+        }
+        .footer-row {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+        .hero-ctr,
+        .bk,
+        .feat-bg-num,
+        .cdot {
+          display: none;
+        }
+        .hero-code-bg {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scan-line"></div>
 
-<div class="scan-line"></div>
+    <!-- NAV -->
+    <nav id="nav">
+      <a href="#hero" class="nav-logo"
+        >TAM<span class="r">Z</span><span class="b">IY</span></a
+      >
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Hire me</a>
+    </nav>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="#hero" class="nav-logo">TAM<span class="r">Z</span><span class="b">IY</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#contact" class="nav-cta">Hire me</a>
-</nav>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="section-scan"></div>
+      <div class="hero-slice"></div>
+      <div class="orb-r"></div>
+      <div class="orb-b"></div>
+      <div class="bk bk-tl"></div>
+      <div class="bk bk-tr"></div>
+      <div class="bk bk-bl"></div>
+      <div class="bk bk-br"></div>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="section-scan"></div>
-  <div class="hero-slice"></div>
-  <div class="orb-r"></div>
-  <div class="orb-b"></div>
-  <div class="bk bk-tl"></div>
-  <div class="bk bk-tr"></div>
-  <div class="bk bk-bl"></div>
-  <div class="bk bk-br"></div>
-
-  <!-- faint code bg -->
-  <div class="hero-code-bg">@RestController
-@RequestMapping("/api/courses")
-public class CourseController {
-
-  @Autowired
-  private CourseService service;
-
-  @GetMapping
-  @PreAuthorize("hasRole('STUDENT')")
-  public Page&lt;CourseDTO&gt; getCourses(
-      @RequestParam(required=false) String category,
-      @RequestParam(defaultValue="0") int page,
-      Pageable pageable) {
-    return service.findAll(category, pageable);
-  }
-
-  @PostMapping
-  @PreAuthorize("hasRole('INSTRUCTOR')")
-  public ResponseEntity&lt;CourseDTO&gt; create(
-      @Valid @RequestBody CreateCourseRequest req,
-      @AuthenticationPrincipal UserPrincipal user) {
-    return ResponseEntity.status(201)
-      .body(service.create(req, user.getId()));
-  }
-}
-
-// JWT filter — fires before every request
-@Component
-public class JwtAuthFilter extends OncePerRequestFilter {
-  @Override
-  protected void doFilterInternal(
-      HttpServletRequest req,
-      HttpServletResponse res,
-      FilterChain chain) {
-    String token = extractToken(req);
-    if (token != null &amp;&amp; jwtUtil.validate(token)) {
-      SecurityContextHolder.getContext()
-        .setAuthentication(buildAuth(token));
-    }
-    chain.doFilter(req, res);
-  }
-}</div>
-
-  <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <div class="eyebrow-line"></div>
-      Ibadan, Nigeria — Full-Stack Software Engineer
-      <div class="eyebrow-tri"></div>
-    </div>
-    <div class="hero-role">Tamilore</div>
-    <h1 class="hero-headline">
-      <span class="stroke">BUILD</span><br>
-      SYSTEMS<br>
-      <span class="bw">THAT</span> HOLD
-    </h1>
-    <p class="hero-tagline">
-      <span class="tr">// Backend-first engineer</span>&nbsp;&nbsp;
-      <span class="tb">{ Java · Spring Boot · Node.js · React }</span>
-    </p>
-    <p class="hero-sub">
-      Auth that can't be bypassed. Transactions that don't corrupt.
-      APIs built for backend and full-stack systems that scale.
-    </p>
-    <div class="hero-actions">
-      <a href="#projects" class="btn-red">View projects <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a href="https://github.com/Tamziycode" target="_blank" class="btn-blue">GitHub <svg width="14" height="14" fill="currentColor" viewBox="0 0 14 14"><path d="M7 1C3.69 1 1 3.69 1 7c0 2.65 1.72 4.9 4.1 5.69.3.06.41-.13.41-.29v-1.02c-1.67.36-2.02-.8-2.02-.8-.27-.7-.67-.88-.67-.88-.55-.37.04-.36.04-.36.61.04.93.62.93.62.54.93 1.41.66 1.75.5.05-.39.21-.66.38-.81-1.33-.15-2.73-.67-2.73-2.97 0-.66.23-1.19.62-1.61-.06-.15-.27-.76.06-1.58 0 0 .5-.16 1.65.61A5.75 5.75 0 0 1 7 4.68c.51 0 1.02.07 1.5.2 1.15-.77 1.65-.61 1.65-.61.33.82.12 1.43.06 1.58.39.42.62.95.62 1.61 0 2.31-1.4 2.81-2.74 2.96.22.19.41.55.41 1.11v1.65c0 .16.11.35.41.29A6.005 6.005 0 0 0 13 7c0-3.31-2.69-6-6-6z"/></svg></a>
-    </div>
-  </div>
-
-  <div class="hero-scroll">
-    <div class="hs-line"></div>
-    <span class="hs-txt">Scroll to explore</span>
-  </div>
-  <div class="hero-ctr">01</div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-scan"></div>
-  <div class="sh reveal">
-    <span class="snum">01</span>
-    <h2 class="stitle" data-text="About">About<span class="r">.</span></h2>
-    <div class="sline"></div>
-  </div>
-  <div class="about-grid">
-    <div class="at reveal-l">
-      <p>I'm a <strong>Computer Science student and Full-Stack Software Engineer</strong> based in Ibadan, Nigeria. I build backend and full-stack systems that scale.</p>
-      <p>My focus is the engineering beneath the surface: <span class="r">auth that can't be bypassed</span>, transactions that stay consistent under concurrency, <span class="b">relational schema design built for the query patterns that actually matter</span>.</p>
-      <p>Currently mastering Java and Spring Boot — migrating from Node.js-first thinking to proper layered architecture with service/repository separation, JPA entity relationships, and Spring Security. Backed by a solid foundation in Data Structures and Algorithms: I solve problems daily with focus on pattern recognition, time complexity, and writing solutions that hold up under scale — not just in interviews.</p>
-      <p><strong>Open to backend and full-stack roles</strong> where real engineering problems exist and clean solutions are valued.</p>
-      <div class="stats">
-        <div class="stat"><div class="stat-n">4</div><div class="stat-l">Projects shipped</div></div>
-        <div class="stat"><div class="stat-n r">3</div><div class="stat-l">Backend APIs</div></div>
-        <div class="stat"><div class="stat-n">1</div><div class="stat-l">Hackathon</div></div>
+      <!-- faint code bg -->
+      <div class="hero-code-bg">
+        @RestController @RequestMapping("/api/courses") public class
+        CourseController { @Autowired private CourseService service; @GetMapping
+        @PreAuthorize("hasRole('STUDENT')") public Page&lt;CourseDTO&gt;
+        getCourses( @RequestParam(required=false) String category,
+        @RequestParam(defaultValue="0") int page, Pageable pageable) { return
+        service.findAll(category, pageable); } @PostMapping
+        @PreAuthorize("hasRole('INSTRUCTOR')") public
+        ResponseEntity&lt;CourseDTO&gt; create( @Valid @RequestBody
+        CreateCourseRequest req, @AuthenticationPrincipal UserPrincipal user) {
+        return ResponseEntity.status(201) .body(service.create(req,
+        user.getId())); } } // JWT filter — fires before every request
+        @Component public class JwtAuthFilter extends OncePerRequestFilter {
+        @Override protected void doFilterInternal( HttpServletRequest req,
+        HttpServletResponse res, FilterChain chain) { String token =
+        extractToken(req); if (token != null &amp;&amp; jwtUtil.validate(token))
+        { SecurityContextHolder.getContext()
+        .setAuthentication(buildAuth(token)); } chain.doFilter(req, res); } }
       </div>
-    </div>
-    <div class="stack-blk reveal-r">
-      <div>
-        <div class="sr-hdr"><span class="sr-lbl">Languages</span><div class="sr-tick"></div></div>
-        <div class="pills"><span class="pill">Java</span><span class="pill">JavaScript</span><span class="pill">SQL</span><span class="pill">HTML</span><span class="pill">CSS</span></div>
-      </div>
-      <div>
-        <div class="sr-hdr"><span class="sr-lbl">Frameworks & Runtimes</span><div class="sr-tick"></div></div>
-        <div class="pills"><span class="pill">Spring Boot</span><span class="pill">React</span><span class="pill">Node.js</span><span class="pill">Express</span><span class="pill">Vite</span></div>
-      </div>
-      <div>
-        <div class="sr-hdr"><span class="sr-lbl">Databases & Data</span><div class="sr-tick"></div></div>
-        <div class="pills"><span class="pill">MySQL</span><span class="pill">PostgreSQL</span><span class="pill">Schema Design</span><span class="pill">Indexing</span></div>
-      </div>
-      <div>
-        <div class="sr-hdr"><span class="sr-lbl">Security & Auth</span><div class="sr-tick"></div></div>
-        <div class="pills"><span class="pill">JWT</span><span class="pill">bcrypt</span><span class="pill">Spring Security</span><span class="pill">RBAC</span></div>
-      </div>
-      <div>
-        <div class="sr-hdr"><span class="sr-lbl">Tooling</span><div class="sr-tick"></div></div>
-        <div class="pills"><span class="pill">Git</span><span class="pill">Postman</span><span class="pill">VS Code</span><span class="pill">Nodemailer</span></div>
-      </div>
-      <div>
-        <div class="sr-hdr"><span class="sr-lbl">In Progress</span><div class="sr-tick"></div></div>
-        <div class="pills"><span class="pill">JUnit 5</span><span class="pill">Mockito</span><span class="pill">Redis</span><span class="pill">Docker</span></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-scan"></div>
-  <div class="sh reveal">
-    <span class="snum">02</span>
-    <h2 class="stitle" data-text="Projects">Projects<span class="r">.</span></h2>
-    <div class="sline"></div>
-  </div>
+      <div class="hero-inner">
+        <div class="hero-eyebrow">
+          <div class="eyebrow-line"></div>
+          Ibadan, Nigeria — Full-Stack Software Engineer
+          <div class="eyebrow-tri"></div>
+        </div>
+        <div class="hero-role">Tamilore</div>
+        <h1 class="hero-headline">
+          <span class="stroke">BUILD</span><br />
+          SYSTEMS<br />
+          <span class="bw">THAT</span> HOLD
+        </h1>
+        <p class="hero-tagline">
+          <span class="tr">// Backend-first engineer</span>&nbsp;&nbsp;
+          <span class="tb">{ Java · Spring Boot · Node.js · React }</span>
+        </p>
+        <p class="hero-sub">
+          Auth that can't be bypassed. Transactions that don't corrupt. APIs
+          built for backend and full-stack systems that scale.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-red"
+            >View projects
+            <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
+              <path
+                d="M2 7h10M7 2l5 5-5 5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg
+          ></a>
+          <a
+            href="https://github.com/Tamziycode"
+            target="_blank"
+            class="btn-blue"
+            >GitHub
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 14 14">
+              <path
+                d="M7 1C3.69 1 1 3.69 1 7c0 2.65 1.72 4.9 4.1 5.69.3.06.41-.13.41-.29v-1.02c-1.67.36-2.02-.8-2.02-.8-.27-.7-.67-.88-.67-.88-.55-.37.04-.36.04-.36.61.04.93.62.93.62.54.93 1.41.66 1.75.5.05-.39.21-.66.38-.81-1.33-.15-2.73-.67-2.73-2.97 0-.66.23-1.19.62-1.61-.06-.15-.27-.76.06-1.58 0 0 .5-.16 1.65.61A5.75 5.75 0 0 1 7 4.68c.51 0 1.02.07 1.5.2 1.15-.77 1.65-.61 1.65-.61.33.82.12 1.43.06 1.58.39.42.62.95.62 1.61 0 2.31-1.4 2.81-2.74 2.96.22.19.41.55.41 1.11v1.65c0 .16.11.35.41.29A6.005 6.005 0 0 0 13 7c0-3.31-2.69-6-6-6z"
+              /></svg
+          ></a>
+        </div>
+      </div>
 
-  <!-- LEARNOVA -->
-  <div class="featured reveal">
-    <div class="feat-bg-num">01</div>
-    <div class="feat-card">
-      <div class="feat-inner">
-        <div class="feat-l">
-          <div class="feat-flag"><div class="ff-dot"></div>Flagship project</div>
-          <div class="feat-name">Learnova</div>
-          <div class="feat-sub">// Full-Stack E-Learning Platform</div>
-          <p class="feat-desc">
-            Production-grade learning platform with dual user roles, end-to-end JWT auth, email verification,
-            and a custom dark-mode design system. Built in four deliberate phases —
-            auth foundation, core features, design polish, production hardening.
+      <div class="hero-scroll">
+        <div class="hs-line"></div>
+        <span class="hs-txt">Scroll to explore</span>
+      </div>
+      <div class="hero-ctr">01</div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-scan"></div>
+      <div class="sh reveal">
+        <span class="snum">01</span>
+        <h2 class="stitle" data-text="About">About<span class="r">.</span></h2>
+        <div class="sline"></div>
+      </div>
+      <div class="about-grid">
+        <div class="at reveal-l">
+          <p>
+            I'm a
+            <strong
+              >Computer Science student and Full-Stack Software Engineer</strong
+            >
+            based in Ibadan, Nigeria. I build backend and full-stack systems
+            that scale.
           </p>
-          <div class="pills" style="margin-bottom:2rem;">
-            <span class="pill">React 19</span><span class="pill">Node.js</span><span class="pill">Express 5</span>
-            <span class="pill">MySQL</span><span class="pill">JWT</span><span class="pill">Resend</span>
-          </div>
-          <div class="feat-links">
-            <a href="https://learnova-omega.vercel.app" target="_blank" class="btn-red sm">Live demo →</a>
-            <a href="https://github.com/Tamziycode/learnova" target="_blank" class="btn-blue sm">GitHub</a>
+          <p>
+            My focus is the engineering beneath the surface:
+            <span class="r">auth that can't be bypassed</span>, transactions
+            that stay consistent under concurrency,
+            <span class="b"
+              >relational schema design built for the query patterns that
+              actually matter</span
+            >.
+          </p>
+          <p>
+            Currently mastering Java and Spring Boot — migrating from
+            Node.js-first thinking to proper layered architecture with
+            service/repository separation, JPA entity relationships, and Spring
+            Security. Backed by a solid foundation in Data Structures and
+            Algorithms: I solve problems daily with focus on pattern
+            recognition, time complexity, and writing solutions that hold up
+            under scale — not just in interviews.
+          </p>
+          <p>
+            <strong>Open to backend and full-stack roles</strong> where real
+            engineering problems exist and clean solutions are valued.
+          </p>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-n">4</div>
+              <div class="stat-l">Projects shipped</div>
+            </div>
+            <div class="stat">
+              <div class="stat-n r">3</div>
+              <div class="stat-l">Backend APIs</div>
+            </div>
+            <div class="stat">
+              <div class="stat-n">1</div>
+              <div class="stat-l">Hackathon</div>
+            </div>
           </div>
         </div>
-        <div class="feat-r">
-          <ul class="feat-items">
-            <li class="feat-item">
-              <span class="ftag">Auth</span>
-              <span class="fbody">
-                <strong>Stateless JWT sessions + bcrypt (cost 10).</strong>
-                Signup triggers a branded email with a 32-byte cryptographic token.
-                Accounts locked at the API level until confirmed.
-                Frontend AuthContext handles token expiry and invalid-token cases separately —
-                no broken states served to users.
-                <span class="planned">Planned: HttpOnly cookie transport + Redis token blacklist for logout revocation</span>
-              </span>
+        <div class="stack-blk reveal-r">
+          <div>
+            <div class="sr-hdr">
+              <span class="sr-lbl">Languages</span>
+              <div class="sr-tick"></div>
+            </div>
+            <div class="pills">
+              <span class="pill">Java</span><span class="pill">JavaScript</span
+              ><span class="pill">SQL</span><span class="pill">HTML</span
+              ><span class="pill">CSS</span>
+            </div>
+          </div>
+          <div>
+            <div class="sr-hdr">
+              <span class="sr-lbl">Frameworks & Runtimes</span>
+              <div class="sr-tick"></div>
+            </div>
+            <div class="pills">
+              <span class="pill">Spring Boot</span
+              ><span class="pill">React</span><span class="pill">Node.js</span
+              ><span class="pill">Express</span><span class="pill">Vite</span>
+            </div>
+          </div>
+          <div>
+            <div class="sr-hdr">
+              <span class="sr-lbl">Databases & Data</span>
+              <div class="sr-tick"></div>
+            </div>
+            <div class="pills">
+              <span class="pill">MySQL</span><span class="pill">PostgreSQL</span
+              ><span class="pill">Schema Design</span
+              ><span class="pill">Indexing</span>
+            </div>
+          </div>
+          <div>
+            <div class="sr-hdr">
+              <span class="sr-lbl">Security & Auth</span>
+              <div class="sr-tick"></div>
+            </div>
+            <div class="pills">
+              <span class="pill">JWT</span><span class="pill">bcrypt</span
+              ><span class="pill">Spring Security</span
+              ><span class="pill">RBAC</span>
+            </div>
+          </div>
+          <div>
+            <div class="sr-hdr">
+              <span class="sr-lbl">Tooling</span>
+              <div class="sr-tick"></div>
+            </div>
+            <div class="pills">
+              <span class="pill">Git</span><span class="pill">Postman</span
+              ><span class="pill">VS Code</span
+              ><span class="pill">Nodemailer</span>
+            </div>
+          </div>
+          <div>
+            <div class="sr-hdr">
+              <span class="sr-lbl">In Progress</span>
+              <div class="sr-tick"></div>
+            </div>
+            <div class="pills">
+              <span class="pill">JUnit 5</span><span class="pill">Mockito</span
+              ><span class="pill">Redis</span><span class="pill">Docker</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-scan"></div>
+      <div class="sh reveal">
+        <span class="snum">02</span>
+        <h2 class="stitle" data-text="Projects">
+          Projects<span class="r">.</span>
+        </h2>
+        <div class="sline"></div>
+      </div>
+
+      <!-- LEARNOVA -->
+      <div class="featured reveal">
+        <div class="feat-bg-num">01</div>
+        <div class="feat-card">
+          <div class="feat-inner">
+            <div class="feat-l">
+              <div class="feat-flag">
+                <div class="ff-dot"></div>
+                Flagship project
+              </div>
+              <div class="feat-name">Learnova</div>
+              <div class="feat-sub">// Full-Stack E-Learning Platform</div>
+              <p class="feat-desc">
+                Production-grade learning platform with dual user roles,
+                end-to-end JWT auth, email verification, and a custom dark-mode
+                design system. Built in four deliberate phases — auth
+                foundation, core features, design polish, production hardening.
+              </p>
+              <div class="pills" style="margin-bottom: 2rem">
+                <span class="pill">React 19</span
+                ><span class="pill">Node.js</span
+                ><span class="pill">Express 5</span>
+                <span class="pill">MySQL</span><span class="pill">JWT</span
+                ><span class="pill">Resend</span>
+              </div>
+              <div class="feat-links">
+                <a
+                  href="https://learnova-omega.vercel.app"
+                  target="_blank"
+                  class="btn-red sm"
+                  >Live demo →</a
+                >
+                <a
+                  href="https://github.com/Tamziycode/learnova"
+                  target="_blank"
+                  class="btn-blue sm"
+                  >GitHub</a
+                >
+              </div>
+            </div>
+            <div class="feat-r">
+              <ul class="feat-items">
+                <li class="feat-item">
+                  <span class="ftag">Auth</span>
+                  <span class="fbody">
+                    <strong>Stateless JWT sessions + bcrypt (cost 10).</strong>
+                    Signup triggers a branded email with a 32-byte cryptographic
+                    token. Accounts locked at the API level until confirmed.
+                    Frontend AuthContext handles token expiry and invalid-token
+                    cases separately — no broken states served to users.
+                    <span class="planned"
+                      >Planned: HttpOnly cookie transport + Redis token
+                      blacklist for logout revocation</span
+                    >
+                  </span>
+                </li>
+                <li class="feat-item">
+                  <span class="ftag">RBAC</span>
+                  <span class="fbody">
+                    <strong>Three independent enforcement layers:</strong> React
+                    route guard, Express middleware, and ownership-verified SQL
+                    query. Instructor course mutations check
+                    <code style="font-size: 0.78rem; color: var(--blue)"
+                      >WHERE instructor_id = ?</code
+                    >
+                    at the database level — no client-side bypass reaches data.
+                  </span>
+                </li>
+                <li class="feat-item">
+                  <span class="ftag">Perf</span>
+                  <span class="fbody">
+                    <strong>State-driven URL architecture</strong> — search and
+                    filter state persists in query params, making every filtered
+                    view directly linkable and browser-back safe. SQL queries
+                    optimised on indexed foreign keys for sub-200ms course
+                    filter responses.
+                  </span>
+                </li>
+                <li class="feat-item">
+                  <span class="ftag red">Prod</span>
+                  <span class="fbody">
+                    <strong
+                      >Error boundaries, loading skeletons, custom 404,</strong
+                    >
+                    CORS restricted to deployed origin. Typed error responses
+                    distinguish expired tokens from invalid tokens. ~30 files
+                    across frontend/backend. 1,200+ line CSS design system.
+                    <span class="in-progress"
+                      >In progress: JUnit 5 + Mockito test suite for service
+                      layer</span
+                    >
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT GRID -->
+      <div class="pgrid reveal">
+        <!-- GigConnect -->
+        <div class="pcard">
+          <div class="plabel">// Hackathon — Fintech</div>
+          <div class="pname">GigConnect</div>
+          <p class="pdesc">
+            Escrow-backed service marketplace connecting clients to local
+            artisans. Payment trust is architectural, not cosmetic.
+          </p>
+          <ul class="pbullets">
+            <li>
+              <strong style="color: var(--text)">Interswitch API escrow</strong>
+              — funds held until both parties confirm job completion,
+              eliminating dispute risk without manual mediation
             </li>
-            <li class="feat-item">
-              <span class="ftag">RBAC</span>
-              <span class="fbody">
-                <strong>Three independent enforcement layers:</strong> React route guard,
-                Express middleware, and ownership-verified SQL query.
-                Instructor course mutations check <code style="font-size:.78rem;color:var(--blue);">WHERE instructor_id = ?</code>
-                at the database level — no client-side bypass reaches data.
-              </span>
+            <li>
+              Webhook handler with idempotency key validation — prevents
+              double-charging on API retries
+              <span class="planned">planned</span>
             </li>
-            <li class="feat-item">
-              <span class="ftag">Perf</span>
-              <span class="fbody">
-                <strong>State-driven URL architecture</strong> — search and filter state persists in
-                query params, making every filtered view directly linkable and browser-back safe.
-                SQL queries optimised on indexed foreign keys for sub-200ms course filter responses.
-              </span>
+            <li>
+              Community price index aggregates average rates across the platform
+              — anti-exploitation layer against price gouging
             </li>
-            <li class="feat-item">
-              <span class="ftag red">Prod</span>
-              <span class="fbody">
-                <strong>Error boundaries, loading skeletons, custom 404,</strong>
-                CORS restricted to deployed origin.
-                Typed error responses distinguish expired tokens from invalid tokens.
-                ~30 files across frontend/backend. 1,200+ line CSS design system.
-                <span class="in-progress">In progress: JUnit 5 + Mockito test suite for service layer</span>
-              </span>
+            <li>
+              Geolocation routing connects clients to nearest available
+              professional
+            </li>
+            <li>
+              Strict MVC — auth, job lifecycle, chat in independent, testable
+              modules
             </li>
           </ul>
+          <div class="pstack">
+            <span class="mtag">Node.js</span><span class="mtag">Express</span
+            ><span class="mtag">MySQL</span
+            ><span class="mtag">Interswitch API</span>
+          </div>
+          <a
+            href="https://github.com/Tamziycode/gigconnect"
+            target="_blank"
+            class="plink"
+            >View on GitHub</a
+          >
+        </div>
+
+        <!-- Library API -->
+        <div class="pcard">
+          <div class="plabel">// Backend API — Concurrency</div>
+          <div class="pname">Library Management API</div>
+          <p class="pdesc">
+            Enterprise REST API for library inventory and patron lifecycle.
+            Architecture prioritises data integrity over convenience.
+          </p>
+          <ul class="pbullets">
+            <li>
+              <strong style="color: var(--text)"
+                >Pessimistic locking on borrow transactions</strong
+              >
+              — concurrent requests for the last copy cannot both succeed; one
+              blocks until the first commits
+              <span class="planned">planned: Spring Data JPA migration</span>
+            </li>
+            <li>
+              JWT RBAC with distinct permission scopes — admin (inventory write)
+              vs patron (borrow/view) enforced at middleware, not controller
+              logic
+            </li>
+            <li>
+              Paginated, cursor-aware REST endpoints with indexed filtering —
+              response times stay predictable as catalogue scales
+            </li>
+            <li>
+              Transactional rollback on partial borrow failures — inventory
+              count never decrements without a matching borrow record
+            </li>
+          </ul>
+          <div class="pstack">
+            <span class="mtag">Node.js</span><span class="mtag">Express</span
+            ><span class="mtag">MySQL</span><span class="mtag">JWT</span>
+          </div>
+          <a
+            href="https://github.com/Tamziycode/library-api"
+            target="_blank"
+            class="plink"
+            >View on GitHub</a
+          >
+        </div>
+
+        <!-- Exam System -->
+        <div class="pcard">
+          <div class="plabel">// Security — Browser</div>
+          <div class="pname">Exam System</div>
+          <p class="pdesc">
+            Secure assessment platform. Anti-cheat logic sits in a middleware
+            layer — no UI action is trusted at face value.
+          </p>
+          <ul class="pbullets">
+            <li>
+              Visibility API + fullscreen enforcement + input interception at
+              the browser event level — tab switches and copy events are
+              captured before they reach the DOM
+            </li>
+            <li>
+              Session state serialised to server on each answer — exam recovers
+              in under 1s after network interruption without answer loss
+            </li>
+            <li>
+              Anti-cheat violations logged server-side with timestamp and event
+              type — tamper evidence, not just prevention
+            </li>
+          </ul>
+          <div class="pstack">
+            <span class="mtag">JavaScript</span><span class="mtag">Node.js</span
+            ><span class="mtag">MongoDB</span>
+          </div>
+          <a
+            href="https://github.com/Tamziycode/exam-system"
+            target="_blank"
+            class="plink"
+            >View on GitHub</a
+          >
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- PROJECT GRID -->
-  <div class="pgrid reveal">
-
-    <!-- GigConnect -->
-    <div class="pcard">
-      <div class="plabel">// Hackathon — Fintech</div>
-      <div class="pname">GigConnect</div>
-      <p class="pdesc">Escrow-backed service marketplace connecting clients to local artisans. Payment trust is architectural, not cosmetic.</p>
-      <ul class="pbullets">
-        <li><strong style="color:var(--text)">Interswitch API escrow</strong> — funds held until both parties confirm job completion, eliminating dispute risk without manual mediation</li>
-        <li>Webhook handler with idempotency key validation — prevents double-charging on API retries <span class="planned">planned</span></li>
-        <li>Community price index aggregates average rates across the platform — anti-exploitation layer against price gouging</li>
-        <li>Geolocation routing connects clients to nearest available professional</li>
-        <li>Strict MVC — auth, job lifecycle, chat in independent, testable modules</li>
-      </ul>
-      <div class="pstack"><span class="mtag">Node.js</span><span class="mtag">Express</span><span class="mtag">MySQL</span><span class="mtag">Interswitch API</span></div>
-      <a href="https://github.com/Tamziycode/gigconnect" target="_blank" class="plink">View on GitHub</a>
-    </div>
-
-    <!-- Library API -->
-    <div class="pcard">
-      <div class="plabel">// Backend API — Concurrency</div>
-      <div class="pname">Library Management API</div>
-      <p class="pdesc">Enterprise REST API for library inventory and patron lifecycle. Architecture prioritises data integrity over convenience.</p>
-      <ul class="pbullets">
-        <li><strong style="color:var(--text)">Pessimistic locking on borrow transactions</strong> — concurrent requests for the last copy cannot both succeed; one blocks until the first commits <span class="planned">planned: Spring Data JPA migration</span></li>
-        <li>JWT RBAC with distinct permission scopes — admin (inventory write) vs patron (borrow/view) enforced at middleware, not controller logic</li>
-        <li>Paginated, cursor-aware REST endpoints with indexed filtering — response times stay predictable as catalogue scales</li>
-        <li>Transactional rollback on partial borrow failures — inventory count never decrements without a matching borrow record</li>
-      </ul>
-      <div class="pstack"><span class="mtag">Node.js</span><span class="mtag">Express</span><span class="mtag">MySQL</span><span class="mtag">JWT</span></div>
-      <a href="https://github.com/Tamziycode/library-api" target="_blank" class="plink">View on GitHub</a>
-    </div>
-
-    <!-- Exam System -->
-    <div class="pcard">
-      <div class="plabel">// Security — Browser</div>
-      <div class="pname">Exam System</div>
-      <p class="pdesc">Secure assessment platform. Anti-cheat logic sits in a middleware layer — no UI action is trusted at face value.</p>
-      <ul class="pbullets">
-        <li>Visibility API + fullscreen enforcement + input interception at the browser event level — tab switches and copy events are captured before they reach the DOM</li>
-        <li>Session state serialised to server on each answer — exam recovers in under 1s after network interruption without answer loss</li>
-        <li>Anti-cheat violations logged server-side with timestamp and event type — tamper evidence, not just prevention</li>
-      </ul>
-      <div class="pstack"><span class="mtag">JavaScript</span><span class="mtag">Node.js</span><span class="mtag">MongoDB</span></div>
-      <a href="https://github.com/Tamziycode/exam-system" target="_blank" class="plink">View on GitHub</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-scan"></div>
-  <div class="cc"></div>
-  <div class="cdot cdot-1"></div>
-  <div class="cdot cdot-2"></div>
-  <div class="cdot cdot-3"></div>
-  <div class="cdot cdot-4"></div>
-  <div class="ci">
-    <div class="avail reveal">Full-Stack Software Engineer — open to roles</div>
-    <h2 class="chtitle reveal">
-      LET'S BUILD<br>SOMETHING<br><span class="r">REAL</span><span class="b">.</span>
-    </h2>
-    <p class="chsub reveal">
-      I know what production-grade looks like and I'm building toward it deliberately.
-      If your team needs a backend-first engineer who thinks about locking strategies,
-      token revocation, and idempotency — let's talk.
-    </p>
-    <div class="clinks reveal">
-      <a href="mailto:tamziyafolabi@gmail.com" class="btn-red">Open a conversation →</a>
-      <a href="https://www.linkedin.com/in/tamilore-afolabi/" target="_blank" class="btn-blue">LinkedIn</a>
-      <a href="https://github.com/Tamziycode" target="_blank" class="btn-blue">GitHub</a>
-    </div>
-    <div class="fdiv reveal">
-      <div class="fdiv-line"></div>
-      <div class="fdiv-diamond"></div>
-      <div class="fdiv-line"></div>
-    </div>
-    <div class="footer-row reveal">
-      <span class="fcopy">© 2025 Tamilore — Built with <span class="r">♥</span> in Ibadan</span>
-      <div class="flinks">
-        <a href="#hero">Top</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-scan"></div>
+      <div class="cc"></div>
+      <div class="cdot cdot-1"></div>
+      <div class="cdot cdot-2"></div>
+      <div class="cdot cdot-3"></div>
+      <div class="cdot cdot-4"></div>
+      <div class="ci">
+        <div class="avail reveal">
+          Full-Stack Software Engineer — open to roles
+        </div>
+        <h2 class="chtitle reveal">
+          LET'S BUILD<br />SOMETHING<br /><span class="r">REAL</span
+          ><span class="b">.</span>
+        </h2>
+        <p class="chsub reveal">
+          I know what production-grade looks like and I'm building toward it
+          deliberately. If your team needs a backend-first engineer who thinks
+          about locking strategies, token revocation, and idempotency — let's
+          talk.
+        </p>
+        <div class="clinks reveal">
+          <a href="mailto:tamziyafolabi@gmail.com" class="btn-red"
+            >Open a conversation →</a
+          >
+          <a
+            href="https://www.linkedin.com/in/tamilore-afolabi/"
+            target="_blank"
+            class="btn-blue"
+            >LinkedIn</a
+          >
+          <a
+            href="https://github.com/Tamziycode"
+            target="_blank"
+            class="btn-blue"
+            >GitHub</a
+          >
+        </div>
+        <div class="fdiv reveal">
+          <div class="fdiv-line"></div>
+          <div class="fdiv-diamond"></div>
+          <div class="fdiv-line"></div>
+        </div>
+        <div class="footer-row reveal">
+          <span class="fcopy"
+            >© 2025 Tamilore — Built with <span class="r">♥</span> in
+            Ibadan</span
+          >
+          <div class="flinks">
+            <a href="#hero">Top</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<script>
-/* ── NAV SCROLL ── */
-window.addEventListener('scroll', () =>
-  document.getElementById('nav').classList.toggle('scrolled', scrollY > 50));
+    <script>
+      /* ── NAV SCROLL ── */
+      window.addEventListener("scroll", () =>
+        document
+          .getElementById("nav")
+          .classList.toggle("scrolled", scrollY > 50),
+      );
 
-/* ── SECTION SCAN on enter ── */
-const secObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('scanning');
-      setTimeout(() => e.target.classList.remove('scanning'), 900);
-      secObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.05 });
-document.querySelectorAll('section').forEach(s => secObs.observe(s));
+      /* ── SECTION SCAN on enter ── */
+      const secObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("scanning");
+              setTimeout(() => e.target.classList.remove("scanning"), 900);
+              secObs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.05 },
+      );
+      document.querySelectorAll("section").forEach((s) => secObs.observe(s));
 
-/* ── REVEAL on scroll ── */
-const revObs = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('v'), i * 70);
-      revObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => revObs.observe(el));
+      /* ── REVEAL on scroll ── */
+      const revObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              setTimeout(() => e.target.classList.add("v"), i * 70);
+              revObs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08 },
+      );
+      document
+        .querySelectorAll(".reveal,.reveal-l,.reveal-r")
+        .forEach((el) => revObs.observe(el));
 
-/* ── MATRIX TEXT REVEAL on section headings ── */
-const CHARS = '01アイウエオカキ#$@%&?!';
-function matrixReveal(el) {
-  const original = el.dataset.text;
-  if (!original) return;
-  let frame = 0;
-  const totalFrames = 18;
-  const interval = setInterval(() => {
-    frame++;
-    const progress = frame / totalFrames;
-    let result = '';
-    for (let i = 0; i < original.length; i++) {
-      if (original[i] === ' ') { result += ' '; continue; }
-      if (i / original.length < progress) {
-        result += original[i];
-      } else {
-        result += CHARS[Math.floor(Math.random() * CHARS.length)];
+      /* ── MATRIX TEXT REVEAL on section headings ── */
+      const CHARS = "01アイウエオカキ#$@%&?!";
+      function matrixReveal(el) {
+        const original = el.dataset.text;
+        if (!original) return;
+        let frame = 0;
+        const totalFrames = 18;
+        const interval = setInterval(() => {
+          frame++;
+          const progress = frame / totalFrames;
+          let result = "";
+          for (let i = 0; i < original.length; i++) {
+            if (original[i] === " ") {
+              result += " ";
+              continue;
+            }
+            if (i / original.length < progress) {
+              result += original[i];
+            } else {
+              result += CHARS[Math.floor(Math.random() * CHARS.length)];
+            }
+          }
+          // preserve the .r span for the dot
+          el.childNodes[0].textContent = result;
+          if (frame >= totalFrames) {
+            el.childNodes[0].textContent = original;
+            clearInterval(interval);
+          }
+        }, 45);
       }
-    }
-    // preserve the .r span for the dot
-    el.childNodes[0].textContent = result;
-    if (frame >= totalFrames) {
-      el.childNodes[0].textContent = original;
-      clearInterval(interval);
-    }
-  }, 45);
-}
 
-const matrixObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      setTimeout(() => matrixReveal(e.target), 200);
-      matrixObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.stitle[data-text]').forEach(el => matrixObs.observe(el));
-</script>
-</body>
+      const matrixObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              setTimeout(() => matrixReveal(e.target), 200);
+              matrixObs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+      document
+        .querySelectorAll(".stitle[data-text]")
+        .forEach((el) => matrixObs.observe(el));
+    </script>
+  </body>
 </html>

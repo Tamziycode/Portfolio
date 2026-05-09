@@ -1,0 +1,27 @@
+<svg viewBox="0 0 680 680" width="680" height="680" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="red-sharp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff1744"/>
+      <stop offset="100%" stop-color="#b71c2e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Pure black background -->
+  <rect width="680" height="680" fill="#000000" rx="100"/>
+
+  <!-- T horizontal bar — thin, refined, sharp edges -->
+  <rect x="155" y="195" width="370" height="52" fill="url(#red-sharp)"/>
+
+  <!-- T vertical bar — narrow, precise -->
+  <rect x="314" y="195" width="52" height="310" fill="url(#red-sharp)"/>
+
+  <!-- Single pixel top highlight -->
+  <rect x="155" y="195" width="370" height="1" fill="rgba(255,100,130,0.7)"/>
+
+  <!-- Single pixel left highlight on stem -->
+  <rect x="314" y="247" width="1" height="258" fill="rgba(255,100,130,0.5)"/>
+
+  <!-- Hairline bottom edge of crossbar -->
+  <rect x="155" y="246" width="370" height="1" fill="rgba(0,0,0,0.4)"/>
+
+</svg>
